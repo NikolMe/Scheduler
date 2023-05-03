@@ -1,0 +1,32 @@
+﻿@model List<Service>
+
+@{
+    ViewData["Title"] = "Прайс";
+}
+<h1>@ViewData["Title"]</h1>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            Послуга
+        </th>
+        <th>
+            Вартість (грн)
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Procedure)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

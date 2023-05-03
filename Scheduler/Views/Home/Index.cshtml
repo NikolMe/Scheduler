@@ -1,0 +1,44 @@
+﻿@model PlaceListViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+@if (TempData.ContainsKey("success"))
+{
+    <div class="alert alert-success">@TempData["success"]</div>
+}
+<div class="text-center">
+    <h1 class="display-4">Знайди для себе час</h1>
+</div>
+<form method="get" class="row row-cols-lg-auto g-3 align-items-center">
+    <div class="col-4">
+        <label for="serviceId">Оберіть послугу</label>
+    </div>
+    <div class="col-4">
+        <select class="form-control" name="serviceId" id="serviceId">
+            @foreach (var service in Model.ServiceList)
+            {
+                <option value="@service.Id">@service.Procedure</option>
+            }
+        </select>
+    </div>
+    <input class="col-4 btn btn-outline-dark col-sm-1" type="submit" value="Знайти час"/>
+</form>
+
+@foreach (var places in Model.PlaceList)
+{
+    <p class="text-left mt-5 h6 " style="font-family: Serif">@places.Key.Day @UkrainianMonth.ConvertMonth(places.Key.Month)</p>
+    <hr/>
+    foreach (var place in places)
+    {
+        <a type="button"
+           class="btn btn-outline-dark btn-lg mt-1"
+           asp-controller="Places"
+           asp-action="SelfPlace"
+           asp-route-placeId="@place.Id"
+           asp-route-date="@place.Time"
+           asp-route-serviceId="@Model.SelectedServiceId">
+            @place.Time.Hour.ToString("00"):@place.Time.Minute.ToString("00")
+        </a>
+    }
+}

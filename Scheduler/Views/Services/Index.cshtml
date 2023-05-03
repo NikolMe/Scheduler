@@ -1,0 +1,48 @@
+@model IEnumerable<Scheduler.Models.Service>
+
+@{
+    ViewData["Title"] = "Послуги";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Послуги</h1>
+
+<p>
+    <a asp-action="Create">Створити послугу</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Послуга
+            </th>
+            <th>
+                Ціна
+            </th>
+            <th>
+                Тривалість
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Procedure)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TimeStamp)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Редагувати</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Перегляд</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Видалити</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

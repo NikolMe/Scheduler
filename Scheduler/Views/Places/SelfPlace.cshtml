@@ -1,0 +1,29 @@
+@model SelfPlaceViewModel;
+
+@{
+    ViewBag.Title = "Запис";
+    Layout = "_Layout";
+}
+<p>Запис @Model.Date.Day @UkrainianMonth.ConvertMonth(Model.Date.Month) на @Model.Date.Hour.ToString("00"):@Model.Date.Minute.ToString("00").</p>
+<form method="post">
+    <input type="hidden" value="@Model.ServiceId" name="serviceId">
+    <div class="form-group row">
+        <label for="name" class="col-3 col-form-label"><b>Ім'я</b></label>
+        <div class="col-3">
+            <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="phone" class="col-3 col-form-label"><b>Номер телефону</b></label>
+        <div class="col-3 ">
+            <input type="tel" class="form-control" id="phone" name="phone" placeholder="0XXXXXXXXX" pattern="0[0-9]{9}"
+                   required>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-3">
+            <input type="submit" class="btn btn-success mt-1" value="Записатися"/>
+        </div>
+    </div>
+    <p class="mt-2">Для внесення змін або скасування вашого запису, будь ласка, зверніться до майстра.</p>
+</form>

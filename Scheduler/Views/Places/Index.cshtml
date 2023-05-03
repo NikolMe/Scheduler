@@ -1,0 +1,78 @@
+@model FilterPlacesViewModel
+
+@{
+    ViewData["Title"] = "Записи";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Записи</h1>
+
+<p>
+    <a asp-action="Create">Додати місце</a>
+</p>
+
+<form method="get">
+    <div class="form-inline">
+        <label class="control-label">Послуги: </label>
+        @Html.DropDownList("procedure", Model.Procedures,
+            htmlAttributes: new { @class = "form-control" })
+
+        <input type="submit" value="Фільтр" class="btn btn-default"/>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            Дата
+        </th>
+        <th>
+            Зайнято
+        </th>
+        <th>
+            Ім'я
+        </th>
+        <th>
+            Номер телефону
+        </th>
+        <th>
+            Послуга
+        </th>
+        <th>
+            Кінець дня
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.Places)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Time)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsSelected)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClientName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClientNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Service.Procedure)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndOfTheDay)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Редагувати</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Перегляд</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Видалити</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
