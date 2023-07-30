@@ -193,6 +193,7 @@ namespace Scheduler.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult SelfPlace(int placeId, int serviceId, DateTime date)
         {
             return View(new SelfPlaceViewModel
